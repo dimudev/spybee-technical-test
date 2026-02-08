@@ -20,6 +20,8 @@ export interface Project {
   country?:           number | string;
 }
 
+export type ProjectValue = Project[keyof Project]
+
 export interface User {
     name:     string;
     lastName: string;
