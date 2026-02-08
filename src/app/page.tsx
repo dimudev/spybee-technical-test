@@ -11,11 +11,12 @@ import { Plus } from 'lucide-react'
 import { getProjectColumns } from '@/components/projects/columns/columns'
 import { ViewSwitcher } from '@/components/projects/ViewSwitcher/ViewSwitcher'
 import styles from './page.module.css'
+import { ProjectMap } from '@/components/projects/Map/ProjectMap'
 
 export default function Home () {
   const [currentView, setCurrentView] = useState<'table' | 'map'>('table')
   const [sorting, setSorting] = useState<SortingState>([])
-  const { filteredProjects, projects, fetchProjects, filterProjects } = useProjectStore()
+  const { filteredProjects, projects, fetchProjects, filterProjects, selectProject } = useProjectStore()
 
   useEffect(() => {
     fetchProjects()
@@ -32,6 +33,15 @@ export default function Home () {
       }]
     })
   }
+
+  const handleSelectProject = (id: string | null) => {
+    selectProject(id)
+    if (id) {
+      setCurrentView('map') 
+    }
+  }
+  
+
 
   return (
     <main className={styles.main_container}>
@@ -58,12 +68,11 @@ export default function Home () {
             columns={columns} 
             data={filteredProjects} 
             sorting={sorting} 
-            onSortingChange={setSorting} 
+            onSortingChange={setSorting}
+            onRowClick={handleSelectProject}
           />
         ) : (
-          <div style={{ height: '600px', background: '#ffffff', borderRadius: '12px' }}>
-            <h2 style={{ padding: '20px' }}>Vista de Mapa</h2>
-          </div>
+          <ProjectMap />
         )}
       </section>
     </main>
