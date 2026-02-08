@@ -8,6 +8,8 @@ interface ProjectState {
   isLoading: boolean;
   error: string | null;
   searchQuery: string
+  selectedProjectId: string | null;
+  selectProject: (id: string | null) => void;
 }
 
 interface Actions {
@@ -22,6 +24,8 @@ export const useProjectStore = create<ProjectState & Actions>()((set, get) => ({
   isLoading: false,
   error: null,
   searchQuery: '',
+  selectedProjectId: null,
+  selectProject: (id) => set({ selectedProjectId: id }),
   setProjects: (projects) => set({ projects, filteredProjects: projects }),
 
   fetchProjects: async () => {
