@@ -14,7 +14,20 @@
   border-collapse: separate;
   border-spacing: 0;
   table-layout: fixed;
+
 }
+
+.row_selected td:first-child::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #f1a661;
+  z-index: 20;
+}
+
 
 .th {
   position: sticky;
@@ -65,4 +78,56 @@
   gap: 8px;
   padding: 16px;
   border-top: 1px solid #f3f4f6;
+}
+
+.pagination_controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  padding: 1.25rem 1rem;
+  background-color: #ffffff;
+  border-top: 1px solid #f3f4f6;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.page_info {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.page_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  outline: none;
+}
+
+.page_button:hover:not(:disabled) {
+  background-color: #f9fafb;
+  border-color: #f1a661;
+  color: #f1a661;
+}
+
+.page_button:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+  border-color: #e5e7eb;
+}
+
+.page_button:active:not(:disabled) {
+  transform: scale(0.98);
 }

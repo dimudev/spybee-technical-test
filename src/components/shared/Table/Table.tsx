@@ -8,22 +8,29 @@ import {
   SortingState,
   OnChangeFn
 } from '@tanstack/react-table'
+import { useProjectStore } from '@/store/useProjectStore'
 import styles from './table.module.css'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
-interface Table<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
-  sorting: SortingState 
-  onSortingChange: OnChangeFn<SortingState> 
+interface TableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
+  sorting: SortingState; 
+  onSortingChange: OnChangeFn<SortingState>; 
+  onRowClick?: (id: string) => void;
 }
 
 export function Table<TData, TValue> ({
   columns,
   data,
   sorting,
-  onSortingChange
-}: Table<TData, TValue>) {
+  onSortingChange,
+  onRowClick
+}: TableProps<TData, TValue>) {
   
+  const {  selectedProjectId } = useProjectStore()
+  
+
   // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
@@ -57,29 +64,50 @@ export function Table<TData, TValue> ({
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className={styles.tr_body}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className={styles.td} style={{ width: cell.column.getSize() }}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
+          {table.getRowModel().rows.map((row) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const project = row.original as any 
+            const isSelected = selectedProjectId === project._id
+
+            return (
+              <tr 
+                key={row.id} 
+                className={`${styles.tr_body} ${isSelected ? styles.row_selected : ''}`}
+                onClick={() => onRowClick && onRowClick(project._id)}
+                style={{ cursor: 'pointer' }}
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id} className={styles.td} style={{ width: cell.column.getSize() }}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            )
+          })}
         </tbody>
       </table>
-      <div >
+      
+      <div className={styles.pagination_controls}>
         <button
+          className={styles.page_button}
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Anterior
+          <ChevronLeft size={18} style={{ marginRight: '4px' }} />
+    Anterior
         </button>
+
+        <span className={styles.page_info}>
+    Página <strong>{table.getState().pagination.pageIndex + 1}</strong> de <strong>{table.getPageCount()}</strong>
+        </span>
+
         <button
+          className={styles.page_button}
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          Siguiente
+    Siguiente
+          <ChevronRight size={18} style={{ marginLeft: '4px' }} />
         </button>
       </div>
     </div>
