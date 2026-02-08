@@ -1,0 +1,39 @@
+.triggerButton {
+  padding: 10px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.icon {
+  color: #64748b;
+}
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.optionButton {
+  width: 100%;
+  padding: 14px 20px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 15px;
+  color: #68686b;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.optionButton:hover {
+  background-color: #f8fafc;
+}
+
+.optionButton:not(:last-child) {
+  border-bottom: 1px solid #f1f5f9;
+}

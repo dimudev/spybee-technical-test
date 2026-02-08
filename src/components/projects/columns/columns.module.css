@@ -1,0 +1,53 @@
+.projectCell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 4px 0;
+}
+
+.projectTitle {
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1;
+}
+
+.dateContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.dateItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.incidentsContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 8px;
+}
+
+.incidentItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.incidentCount {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: #111827;
+}
+
+.incidentLabel {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #9ca3af;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
