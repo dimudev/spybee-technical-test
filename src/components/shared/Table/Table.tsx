@@ -93,21 +93,17 @@ export function Table<TData, TValue> ({
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          <ChevronLeft size={18} style={{ marginRight: '4px' }} />
-    Anterior
+          <ChevronLeft size={18} style={{ marginRight: '4px' }} /> Anterior
         </button>
 
-        <span className={styles.page_info}>
-    Página <strong>{table.getState().pagination.pageIndex + 1}</strong> de <strong>{table.getPageCount()}</strong>
-        </span>
+        <span className={styles.page_info}>Página <strong>{table.getState().pagination.pageIndex + 1}</strong> de <strong>{table.getPageCount()}</strong></span>
 
         <button
           className={styles.page_button}
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-    Siguiente
-          <ChevronRight size={18} style={{ marginLeft: '4px' }} />
+    Siguiente <ChevronRight size={18} style={{ marginLeft: '4px' }} />
         </button>
       </div>
     </div>
