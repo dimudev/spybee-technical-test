@@ -10,4 +10,35 @@
 
 .logo {
   color: white;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.user_profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  color: white;
+}
+
+
+.icon_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2c341;
+  color: #1e293b;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.user_name {
+  font-weight: 600;
+}
+
+.user_role {
+  font-size: 12px;
 }
